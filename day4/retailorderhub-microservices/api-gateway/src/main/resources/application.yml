@@ -1,0 +1,50 @@
+# TRAINING NOTE: this is the one file in the whole project that uses YAML
+# instead of .properties - Spring Cloud Gateway's route list (a list of
+# objects, each with its own list of predicates) is genuinely hard to read as
+# flat dot-separated keys. Every other service keeps the monolith's original
+# application.properties style.
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/api/inventory/**
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payments/**
+      # TRAINING NOTE: the frontend (retailorderhub-frontend/) is a plain
+      # static site served from its own origin (e.g. http://localhost:5500),
+      # so its fetch() calls to this gateway on :8080 are cross-origin.
+      # Wide open here ("*") for training convenience - a real deployment
+      # would list the frontend's actual origin(s) instead.
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

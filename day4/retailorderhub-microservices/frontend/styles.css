@@ -1,0 +1,243 @@
+/* ================= Design tokens =================
+   Same Ocean Gradient palette as the course's Day 4 slide deck and lab
+   docs (065A82 / 1C7293 / 21295C), so this looks like it belongs to the
+   same training program rather than a separate generic project. */
+:root {
+  --navy: #21295C;
+  --deep-blue: #065A82;
+  --teal: #1C7293;
+  --ice-blue: #8FC1DA;
+  --pale-bg: #EAF1F5;
+  --muted: #5B6B79;
+  --border: #CBD5DC;
+  --body-text: #1F2933;
+  --white: #FFFFFF;
+  --success-bg: #E4F3EC;
+  --success-text: #1E6B4C;
+  --error-bg: #FBE9E9;
+  --error-text: #9A2E2E;
+
+  --font: "Segoe UI", "Segoe UI Semibold", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  color: var(--body-text);
+  background: var(--white);
+}
+
+/* ================= Top bar ================= */
+.topbar {
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.9rem 1.5rem;
+}
+.topbar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.brand-eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ice-blue);
+  margin-bottom: 0.15rem;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.gateway-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+.gateway-status label {
+  color: var(--ice-blue);
+}
+#gatewayUrl {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.82rem;
+  width: 210px;
+  font-family: var(--font);
+}
+#gatewayUrl:focus {
+  outline: 2px solid var(--ice-blue);
+  outline-offset: 1px;
+}
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--muted);
+  display: inline-block;
+}
+.status-dot.ok { background: #4CAF7D; }
+.status-dot.down { background: #E0645F; }
+.status-text { color: var(--ice-blue); min-width: 5.5em; }
+
+/* ================= Layout ================= */
+.layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+}
+.col { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.4rem 1.5rem;
+}
+.panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+.panel-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* ================= Buttons ================= */
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--teal);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-ghost:hover { background: var(--pale-bg); }
+
+.btn-primary {
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.65rem 1.1rem;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-top: 0.4rem;
+}
+.btn-primary:hover { background: var(--deep-blue); }
+.btn-primary:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+/* ================= Tables ================= */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.data-table th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--pale-bg);
+  vertical-align: top;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+.empty-row { color: var(--muted); font-style: italic; padding: 0.6rem 0.5rem; }
+.stock-low { color: var(--error-text); font-weight: 600; }
+
+/* ================= Form ================= */
+.field { margin-bottom: 0.9rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.field-row { display: flex; gap: 1rem; }
+.field-row .field { flex: 1; }
+label { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+input[type="text"], input[type="number"], select {
+  font-family: var(--font);
+  font-size: 0.92rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--body-text);
+  background: var(--white);
+}
+input:focus, select:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+.field-hint { font-size: 0.74rem; color: var(--muted); }
+
+.item-checklist {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 190px;
+  overflow-y: auto;
+}
+.item-checklist label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  font-size: 0.88rem;
+  color: var(--body-text);
+  cursor: pointer;
+}
+.item-checklist input[type="checkbox"] { accent-color: var(--teal); }
+.item-checklist .out-of-stock { color: var(--muted); text-decoration: line-through; }
+
+/* ================= Banner ================= */
+.banner {
+  border-radius: 7px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+.banner.success { background: var(--success-bg); color: var(--success-text); }
+.banner.error { background: var(--error-bg); color: var(--error-text); }
+
+/* ================= Footer ================= */
+.footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.footer code {
+  background: var(--pale-bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.76rem;
+}
